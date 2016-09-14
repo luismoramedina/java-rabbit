@@ -26,10 +26,9 @@ public class RabbitApplication {
 		return strings -> {
 			MessageProperties messageProperties = new MessageProperties();
 			messageProperties.setContentType("text/plain");
-			messageProperties.setHeader("TRACER", "boot my id");
+			messageProperties.setHeader("spanTraceId", "boot my id");
 			Message msg = new Message("from spring boot".getBytes(), messageProperties);
-
 			rabbitTemplate.convertAndSend(QUEUE_NAME, msg);
-        };
+		};
 	}
 }

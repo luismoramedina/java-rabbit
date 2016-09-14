@@ -11,7 +11,7 @@ import static com.github.luismoramedina.RabbitReceiveConfiguration.QUEUE_NAME;
 public class Receiver {
 
     @RabbitListener(queues = QUEUE_NAME)
-    public void receiveMessage(@Header("TRACER") String tracer, String message) {
+    public void receiveMessage(@Header("spanTraceId") String tracer, String message) {
         System.out.println("message body: " + message);
         System.out.println("header -> tracer:" + tracer);
     }
