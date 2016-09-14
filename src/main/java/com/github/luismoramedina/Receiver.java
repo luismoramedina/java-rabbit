@@ -1,12 +1,19 @@
 package com.github.luismoramedina;
 
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.messaging.handler.annotation.Header;
+
+import static com.github.luismoramedina.RabbitReceiveConfiguration.QUEUE_NAME;
+
 /**
  * @author luismoramedina
  */
 public class Receiver {
 
-    public void receiveMessage(String message) {
-        System.out.println("Received <" + message + ">");
+    @RabbitListener(queues = QUEUE_NAME)
+    public void receiveMessage(@Header("TRACER") String tracer, String message) {
+        System.out.println("message body: " + message);
+        System.out.println("header -> tracer:" + tracer);
     }
 
 }
